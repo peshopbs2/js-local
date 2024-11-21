@@ -4,7 +4,8 @@ function addItemDOM(item)
 {
     var list = document.getElementById("items");
     var li = document.createElement("li");
-    li.innerHTML = item;
+    li.className = "product";
+    li.innerHTML = `<h2>${item.name}</h2><span>$${item.price}</span>`;
     list.appendChild(li);
 }
 
@@ -28,9 +29,16 @@ function loadData()
 function saveItem(event)
 {
     event.preventDefault();
-    let item = document.querySelector("#form-data input[name='item']")
-    addItemDOM(item.value);
-    addItemLocalStorage(item.value);    
+    let name = document.querySelector("#form-data input[name='name']");
+    let price = document.querySelector("#form-data input[name='price']");
+    
+    let item = {
+        "name": name.value,
+        "price": price.value
+    };
+
+    addItemDOM(item);
+    addItemLocalStorage(item);    
 }
 
 document.addEventListener("DOMContentLoaded", () => {
